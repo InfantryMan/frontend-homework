@@ -1,23 +1,13 @@
 function sort(string) {
-    var words = string.split(" ");  // из одной строки с пробелами получаем массив строк
+    var words = string.split(" ").filter(v => v !== '');  // из одной строки с пробелами получаем массив строк
     var i = 0;
 
-    while (i < words.length) {  // удаляем пробелы из массива
-        if (words[i] === '')
-            words.splice(i, 1);
-        else
-            i++;
-    }
-
-    for (i = 0; i < words.length; i++) {
-        words[i] = words[i].toLowerCase().split("").sort(compareLetter).join(''); // сортируем буквы в каждом слове
-        words[i] = words[i][0].toUpperCase() + words[i].substring(1, words[i].length);  // 1 буква прописная
-    }
-
-    words.sort(compareWord);   // сортируем слова в предложении
-
-    return words.join(" "); // из массива строк получаем одну строку
-
+    return words = words.map( v => {
+        v = v.toLowerCase().split("").sort(compareLetter).join("");
+        v = v[0].toUpperCase() + v.substring(1, v.length);
+        return v;
+    }).sort(compareWord).join(" ");
+    
 }
 
 function checkYo(a, b) {    // проверка буквы ё
